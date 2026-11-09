@@ -256,6 +256,12 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     localStorage.removeItem(STORAGE_KEYS.EVENTS);
   };
 
+  const importAllData = (data: { members?: Member[]; kasPayments?: KasPayment[]; events?: OrganizationEvent[] }) => {
+    if (data.members) setMembers(data.members);
+    if (data.kasPayments) setKasPayments(data.kasPayments);
+    if (data.events) setEvents(data.events);
+  };
+
   return (
     <FinanceContext.Provider
       value={{
@@ -276,6 +282,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updateExpenseItem,
         deleteExpenseItem,
         resetToDefaultData,
+        importAllData,
       }}
     >
       {children}
